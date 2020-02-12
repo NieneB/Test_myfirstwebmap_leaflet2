@@ -1,5 +1,5 @@
 //initialize the map
-var map = L.map('map').setView([42.3600825, -71.0588801], 12);
+var map = L.map('map').setView([52.091181, 5.119097], 12);
 
 //Create baselayer - tiles
 var backgroundMap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -35,6 +35,10 @@ hotel.addTo(map);
 var harvard = L.marker([42.376979, -71.116617]);
 harvard.addTo(map);
 
+//Add markers
+var fabriek = L.marker([52.127847, 5.049623]).addTo(map);
+fabriek.addTo(map);
+
 //Add pop-ups
 // var popup = "The Harpoon Brewery.";
 // brewery.bindPopup(popup);
@@ -48,14 +52,18 @@ aquarium.bindPopup(popup2);
 var popup3 = "The Harvard University.";
 harvard.bindPopup(popup3);
 
+
+var popup4 = "De Fabrique";
+fabriek.bindPopup(popup4);
+
 //add a circle
 var circle = L.circle([42.359116, -71.049592], 4500, {
 	color: 'red',
 	fillColor: '#f03',
 	fillOpacity: 0.5
-}).addTo(map);  
+}).addTo(map);
 
-//add a polygon   
+//add a polygon
 var polygon = L.polygon([
 	[42.346868, -71.034396],
 	[42.351340, -71.040495],
@@ -77,32 +85,32 @@ var bigfootIcon = L.icon({
     iconUrl: 'big_foot_orange.png',
     iconSize:     [15, 25], // size of the icon
 });
-
-//create the geojson layer
-var geojson = L.geoJson(null,{
-pointToLayer: function (geoJsonPoint, latlng) {
-	return L.marker(latlng, {icon: bigfootIcon});
-}
-}).addTo(map);
-
-// new Http Request
-var xhttp = new XMLHttpRequest();
-
-// set the request method: get the data
-xhttp.open('GET', encodeURI("All_BFRO_Reports_points.geojson" ));
-
-//specify what must be done with the geojson data to the layer when request is succesfull
-xhttp.onload = function() {
-	if (xhttp.readyState === 4) {
-			// add the json data to the geojson layer we created before!
-			geojson.addData(JSON.parse(xhttp.responseText));
-		} else {
-			alert('Request failed.  Returned status of ' + xhttp.readyState );
-		}
-};
-
-// send the request
-xhttp.send();
+//
+// //create the geojson layer
+// var geojson = L.geoJson(null,{
+// pointToLayer: function (geoJsonPoint, latlng) {
+// 	return L.marker(latlng, {icon: bigfootIcon});
+// }
+// }).addTo(map);
+//
+// // new Http Request
+// var xhttp = new XMLHttpRequest();
+//
+// // set the request method: get the data
+// xhttp.open('GET', encodeURI("All_BFRO_Reports_points.geojson" ));
+//
+// //specify what must be done with the geojson data to the layer when request is succesfull
+// xhttp.onload = function() {
+// 	if (xhttp.readyState === 4) {
+// 			// add the json data to the geojson layer we created before!
+// 			geojson.addData(JSON.parse(xhttp.responseText));
+// 		} else {
+// 			alert('Request failed.  Returned status of ' + xhttp.readyState );
+// 		}
+// };
+//
+// // send the request
+// xhttp.send();
 
 //Jquery method
 // $.getJSON("../workshop/data/All_BFRO_Reports_points.geojson", function(data) {
